@@ -55,7 +55,7 @@ set(SSG_SHARED "${CMAKE_SOURCE_DIR}/shared")
 set(SSG_SHARED_REFS "${SSG_SHARED}/references")
 set(SSG_UTILS_SCRIPTS "${CMAKE_SOURCE_DIR}/utils")
 
-# Content Generation Opetions
+# Content Generation Options
 option(SSG_ANSIBLE_PLAYBOOKS_ENABLED "If enabled, Ansible Playbooks for each profile will be built and installed." TRUE)
 option(SSG_ANSIBLE_PLAYBOOKS_PER_RULE_ENABLED "If enabled, Ansible Playbooks for each rule will be built and installed." FALSE)
 option(SSG_BASH_SCRIPTS_ENABLED "If enabled, Bash remediation scripts for each profile will be built and installed." TRUE)
@@ -119,6 +119,7 @@ option(SSG_PRODUCT_SLMICRO6 "If enabled, the SLE Micro 6 SCAP content will be bu
 option(SSG_PRODUCT_TENCENTOS4 "If enabled, the TencentOS Server 4 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
 option(SSG_PRODUCT_UBUNTU2204 "If enabled, the Ubuntu 22.04 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
 option(SSG_PRODUCT_UBUNTU2404 "If enabled, the Ubuntu 24.04 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
+option(SSG_PRODUCT_UBUNTU2604 "If enabled, the Ubuntu 26.04 SCAP content will be built" ${SSG_PRODUCT_DEFAULT})
 # Products derivatives
 option(SSG_CENTOS_DERIVATIVES_ENABLED "If enabled, CentOS derivative content will be built from the RHEL content" TRUE)
 
@@ -146,7 +147,7 @@ find_program(XMLLINT_EXECUTABLE NAMES xmllint REQUIRED)
 find_program(XSLTPROC_EXECUTABLE NAMES xsltproc REQUIRED)
 find_program(YAMLLINT_EXECUTABLE NAMES yamllint)
 
-if(SSG_PRODUCT_FEDORA OR SSG_PRODUCT_RHEL8 OR SSG_PRODUCT_RHEL9 OR SSG_PRODUCT_RHEL10 OR SSG_PRODUCT_UBUNTU2004 OR SSG_PRODUCT_UBUNTU2204 OR SSG_PRODUCT_UBUNTU2404)
+if(SSG_PRODUCT_FEDORA OR SSG_PRODUCT_RHEL8 OR SSG_PRODUCT_RHEL9 OR SSG_PRODUCT_RHEL10 OR SSG_PRODUCT_UBUNTU2004 OR SSG_PRODUCT_UBUNTU2204 OR SSG_PRODUCT_UBUNTU2404 OR SSG_PRODUCT_UBUNTU2604)
 set(SSG_SCE_ENABLED ON)
 endif()
 
@@ -353,6 +354,7 @@ message(STATUS "SLE Micro 6: ${SSG_PRODUCT_SLMICRO6}")
 message(STATUS "TencentOS Server 4: ${SSG_PRODUCT_TENCENTOS4}")
 message(STATUS "Ubuntu 22.04: ${SSG_PRODUCT_UBUNTU2204}")
 message(STATUS "Ubuntu 24.04: ${SSG_PRODUCT_UBUNTU2404}")
+message(STATUS "Ubuntu 26.04: ${SSG_PRODUCT_UBUNTU2604}")
 message(STATUS " ")
 
 # Remove this option when we would like to run ansible-lint and yamllint against our playbooks by
@@ -487,6 +489,9 @@ if(SSG_PRODUCT_UBUNTU2204)
 endif()
 if(SSG_PRODUCT_UBUNTU2404)
     add_subdirectory("products/ubuntu2404" "ubuntu2404")
+endif()
+if(SSG_PRODUCT_UBUNTU2604)
+    add_subdirectory("products/ubuntu2604" "ubuntu2604")
 endif()
 
 # ZIP only contains source datastreams and kickstarts.

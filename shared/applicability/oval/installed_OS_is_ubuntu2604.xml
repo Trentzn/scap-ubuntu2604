@@ -1,0 +1,41 @@
+<def-group>
+  <definition class="inventory" id="installed_OS_is_ubuntu2604" version="1">
+    <metadata>
+      <title>Ubuntu Linux 26.04 LTS</title>
+      <affected family="unix">
+        <platform>multi_platform_all</platform>
+      </affected>
+      <reference ref_id="cpe:/o:canonical:ubuntu_linux:26.04" source="CPE" />
+      <description>The operating system installed on the system is Ubuntu Linux 26.04 LTS</description>
+    </metadata>
+    <criteria comment="Ubuntu Linux 26.04 LTS is installed" operator="AND">
+      <criterion comment="Ubuntu OS ID matches" test_ref="test_ubuntu2604_os_id" />
+      <criterion comment="Ubuntu 26.04 version matches" test_ref="test_ubuntu2604_version_id" />
+    </criteria>
+  </definition>
+
+  <ind:textfilecontent54_test check="all" check_existence="at_least_one_exists"
+      comment="Check ID=ubuntu in /etc/os-release"
+      id="test_ubuntu2604_os_id" version="1">
+    <ind:object object_ref="obj_ubuntu2604_os_id" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_object id="obj_ubuntu2604_os_id" version="1">
+    <ind:filepath>/etc/os-release</ind:filepath>
+    <ind:pattern operation="pattern match">^ID=ubuntu$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+  <ind:textfilecontent54_test check="all" check_existence="at_least_one_exists"
+      comment="Check VERSION_ID=26.04 in /etc/os-release"
+      id="test_ubuntu2604_version_id" version="1">
+    <ind:object object_ref="obj_ubuntu2604_version_id" />
+  </ind:textfilecontent54_test>
+
+  <ind:textfilecontent54_object id="obj_ubuntu2604_version_id" version="1">
+    <ind:filepath>/etc/os-release</ind:filepath>
+    <ind:pattern operation="pattern match">^VERSION_ID="26\.04"$</ind:pattern>
+    <ind:instance datatype="int">1</ind:instance>
+  </ind:textfilecontent54_object>
+
+</def-group>
